@@ -21,15 +21,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //    self.interfaceTextView.text = @"hi";
     [self getInterfaces];
 }
 
 - (void)getInterfaces {
     
     NSString *interfaceString = @"";
-    NSLog(@"String %@", interfaceString);
-    
     struct ifaddrs* interfaces = NULL;
     struct ifaddrs* temp_addr = NULL;
     
@@ -49,13 +46,10 @@
                 NSString *joinedString = [interfaceString stringByAppendingString:appendedName];
                 interfaceString = joinedString;
             }
-            
             temp_addr = temp_addr->ifa_next;
         }
-        
         self.interfaceTextView.text = interfaceString;
     }
-    
     // Free memory
     freeifaddrs(interfaces);
 }
